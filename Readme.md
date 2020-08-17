@@ -39,7 +39,7 @@ The app will start running at <http://localhost:8080/atm>.
 
 ## Explore Rest APIs
 
-The app defines following CRUD APIs.
+API to increase number in database
 
     GET /api/increasenumber
     
