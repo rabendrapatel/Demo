@@ -4,7 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+
+import org.json.JSONObject;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -12,11 +15,19 @@ public class Response<T> implements Serializable {
 
     private T payload;
     private List<T> listPayload;
+    private HashMap hashPayload;
+    private JSONObject jsoPayload;
     
     private int respCode;
     private String respMessage;
     private String status;
-    private String comments;
+    public JSONObject getJsoPayload() {
+		return jsoPayload;
+	}
+	public void setJsoPayload(JSONObject jsoPayload) {
+		this.jsoPayload = jsoPayload;
+	}
+	private String comments;
     private Throwable throwable;
     
     
@@ -25,6 +36,12 @@ public class Response<T> implements Serializable {
 	}
 	public void setPayload(T payload) {
 		this.payload = payload;
+	}
+	public HashMap getHashPayload() {
+		return hashPayload;
+	}
+	public void setHashPayload(HashMap hashPayload) {
+		this.hashPayload = hashPayload;
 	}
 	public List<T> getListPayload() {
 		return listPayload;

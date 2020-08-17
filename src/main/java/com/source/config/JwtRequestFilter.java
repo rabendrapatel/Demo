@@ -1,6 +1,7 @@
 package com.source.config;
 
 import java.io.IOException;
+import java.util.Enumeration;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,15 +31,19 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
-			throws ServletException, IOException {
-
-		final String requestTokenHeader = request.getHeader("Authorization");
+			throws ServletException, IOException 
+	{
+	        
+	    final String patch = request.getHeader("patch");
+		String requestTokenHeader = request.getHeader("authorization");
 
 		String username = null;
 		String jwtToken = null;
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get only the Token
 		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
 			jwtToken = requestTokenHeader.substring(7);
+			jwtToken = patch+jwtToken;
+			
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 			} catch (IllegalArgumentException e) {
